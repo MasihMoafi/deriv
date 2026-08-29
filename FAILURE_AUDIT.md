@@ -39,4 +39,4 @@ An extra arbitrary file outside the required artifact set is intentionally irrel
 - Full unittest suite: 16 passed, including the exact authoritative sample E2E test, fixture-backed synthetic E2E test, scoring tests, validation tests, and JSON-fence repair tests.
 - Direct validation functions: 6 passed.
 - Root independent validation after final live run: `VALIDATION OK`.
-- Live records: 6, provider `openrouter`, model `openai/gpt-5.6-luna`, fallback count 0.
+- Live records: 6, provider `openrouter`, model `openai/gpt-oss-120b`, fallback count 0.

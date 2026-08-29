@@ -18,7 +18,7 @@ At the beginning of execution, the repository is empty apart from Git metadata. 
 - The shared base was committed as `2f290151ce4b56e99c39f39ae82a91eaf1b1f652`; AGY1 and AGY2 work was inspected and cherry-picked into main as `2b955a3` and `05029f0`.
 - Six direct validation checks, six scoring/reporting tests, one integration test, the local end-to-end run, and independent `python validate.py` verification passed.
 - The fallback run produced six prediction files, six `CLASSIFY` log records, deterministic metrics, and all required report sections.
-- The live OpenRouter run completed with six records using `openai/gpt-5.6-luna`, zero fallback records, valid prediction schemas, and independent `python validate.py` returning `VALIDATION OK`.
+- The final live OpenRouter run completed with six records using `openai/gpt-oss-120b`, zero fallback records, valid prediction schemas, and independent `python validate.py` returning `VALIDATION OK`.
 
 ## Remaining limitations
 

@@ -14,7 +14,7 @@
   <h1>Personal Verification Report</h1>
   <p class="sub">Replayable AI ticket evaluation · authoritative contract audit · fresh evidence run</p>
 </header>
-<div class="banner"><strong>Current state: VERIFIED WITH EXPLICIT CAVEATS.</strong> The live artifact set was regenerated with <code>openai/gpt-5.6-luna</code>; no fallback records were present. This report deliberately separates current compliance from the initial implementation mistakes.</div>
+<div class="banner"><strong>Current state: VERIFIED WITH EXPLICIT CAVEATS.</strong> The final live artifact set was regenerated with <code>openai/gpt-oss-120b</code>; no fallback records were present. This report deliberately separates current compliance from the initial implementation mistakes.</div>
 <section class="cards">
   <div class="card"><div class="num good">5/5</div><div class="label">MUST COMPLETE items now satisfied</div></div>
   <div class="card"><div class="num good">2/2</div><div class="label">SHOULD ATTEMPT items satisfied</div></div>
@@ -33,7 +33,7 @@
 <h2>2. Rubric status against the source of truth</h2>
 <div class="panel">
 <table><thead><tr><th>Requirement</th><th>Status</th><th>Evidence</th></tr></thead><tbody>
-<tr><td>MUST #1 — one LLM classification call per ticket, exact prediction schema, prediction artifacts</td><td><span class="tag pass">PASS</span></td><td>6 live OpenRouter records, 6 prediction files, all model <code>openai/gpt-5.6-luna</code>, fallback count 0.</td></tr>
+<tr><td>MUST #1 — one LLM classification call per ticket, exact prediction schema, prediction artifacts</td><td><span class="tag pass">PASS</span></td><td>6 live OpenRouter records, 6 prediction files, all model <code>openai/gpt-oss-120b</code>, fallback count 0.</td></tr>
 <tr><td>MUST #2 — deterministic validation and validation.json</td><td><span class="tag pass">PASS</span></td><td>Validation module checks JSON, required fields, enums, source ID, and independent validation passes.</td></tr>
 <tr><td>MUST #3 — deterministic metrics and per-ticket results</td><td><span class="tag pass">PASS</span></td><td>Keyed labels accepted; category, priority, sentiment, exact-match, pass/fail metrics generated in code.</td></tr>
 <tr><td>MUST #4 — report with counts, metrics, error analysis, 2–4 improvements</td><td><span class="tag pass">PASS</span></td><td><code>report.md</code> contains Summary, Metrics, Validation status, Deterministic error analysis, and Improvement suggestions.</td></tr>
@@ -75,18 +75,18 @@ prediction_files= 6
 call_records= 6
 stages= ['classify']
 providers= ['openrouter']
-models= ['openai/gpt-5.6-luna']
+models= ['openai/gpt-oss-120b']
 fallback_count= 0
 ticket_count= 6
 labels_type= dict</pre></div>
-<div class="panel"><h3>Current metrics</h3><table><tr><th>Metric</th><th>Value</th></tr><tr><td>Category accuracy</td><td>1.0</td></tr><tr><td>Priority accuracy</td><td>0.6666666666666666</td></tr><tr><td>Sentiment accuracy</td><td>0.6666666666666666</td></tr><tr><td>Exact-match rate</td><td>0.5</td></tr><tr><td>Valid predictions</td><td>6 / 6</td></tr><tr><td>Passed tickets</td><td>3 / 6</td></tr></table><p class="small">These are six-ticket sample metrics, not a general provider benchmark; live model output can vary across runs.</p></div>
+<div class="panel"><h3>Current metrics</h3><table><tr><th>Metric</th><th>Value</th></tr><tr><td>Category accuracy</td><td>0.8333333333333334</td></tr><tr><td>Priority accuracy</td><td>0.8333333333333334</td></tr><tr><td>Sentiment accuracy</td><td>0.8333333333333334</td></tr><tr><td>Exact-match rate</td><td>0.5</td></tr><tr><td>Valid predictions</td><td>6 / 6</td></tr><tr><td>Passed tickets</td><td>3 / 6</td></tr></table><p class="small">These are six-ticket sample metrics, not a general provider benchmark; live model output can vary across runs.</p></div>
 <h2>5. Artifact fingerprints</h2>
 <div class="panel"><p class="small">SHA-256 values were captured after the live Luna run. They let you detect later artifact substitution or mutation.</p><pre>tickets.json       237e36b2de4bcaf58d45a764bf2b367b0a7a15c46c2b43c3aa3a293e99a4ca50
 labels.json        9df26e8d80845e9fd32478c73803b71102a0b8a5447a7e83a808f568d6eaf98d
-validation.json    caf746c8bb26037571327180ced0fec3e3c06c9dacdba50168b097b76dcb4892
-metrics.json       396c7e92b8618e60bf6251e7b2e8375e63a2621077b1b8497f4f8e91dd17f0e1
-report.md          104547d5c8a85e64f265fc458aec9e404eb526eb67b1d5c0a5e62e156f120d6b
-llm_calls.jsonl    6db372d4d8013ae03c82204d667042622e8b368fe53c1b3fe22e7b85898aac65</pre></div>
+validation.json    ca5440e417b86dc726867a4700a9ba099b0c1c12665df7381550295c21ee157b
+metrics.json       605e187ad7cdfa010a10b7d60ec3ade7101f4c912ce8a3f7a9cc2cb04713e864
+report.md          f12ca1b27d8573d02f775609c9c7acc626e60adda9a07d0d5856d395adda09f9
+llm_calls.jsonl    ba7feb2ceb3d7a410049eacc36d88d628aef5398f64b26f68d71f39924e36637</pre></div>
 <h2>6. Adversarial failure audit</h2>
 <div class="panel"><p>Mutations were applied only to disposable copies of a verified baseline. The first harness attempt was discarded because the harness itself had a missing helper and a corrupted baseline; the matrix was rerun correctly.</p><table><thead><tr><th>Mutation</th><th>Before narrow fixes</th><th>After fixes</th></tr></thead><tbody><tr><td>Invalid ISO timestamp</td><td><span class="tag fail">ESCAPED</span></td><td><span class="tag pass">REJECTED</span></td></tr><tr><td>Falsified validation wrapper</td><td><span class="tag fail">ESCAPED</span></td><td><span class="tag pass">REJECTED</span></td></tr><tr><td>Fake nonempty report</td><td><span class="tag fail">ESCAPED</span></td><td><span class="tag pass">REJECTED</span></td></tr><tr><td>Extra prediction file</td><td><span class="tag fail">ESCAPED</span></td><td><span class="tag pass">REJECTED</span></td></tr><tr><td>Malformed input, labels, JSON, IDs, enums, missing files, duplicate/wrong logs, metrics tampering</td><td><span class="tag pass">REJECTED</span></td><td><span class="tag pass">REJECTED</span></td></tr></tbody></table><p class="small">The detailed matrix and residual risks are in <code>FAILURE_AUDIT.md</code>.</p></div>
 <h2>7. Standalone synthetic fixture experiment</h2>
