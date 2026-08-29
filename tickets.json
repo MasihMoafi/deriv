@@ -1,0 +1,32 @@
+[
+  {
+    "ticket_id": "ticket-001",
+    "subject": "Card payment declined",
+    "message": "My card payment was declined twice and I need help understanding the charge."
+  },
+  {
+    "ticket_id": "ticket-002",
+    "subject": "Identity verification question",
+    "message": "Which document should I upload to complete account verification?"
+  },
+  {
+    "ticket_id": "ticket-003",
+    "subject": "Cannot sign in",
+    "message": "I cannot log in after resetting my password and the account is blocked."
+  },
+  {
+    "ticket_id": "ticket-004",
+    "subject": "Trading order rejected",
+    "message": "My trading order failed immediately and I need to know why."
+  },
+  {
+    "ticket_id": "ticket-005",
+    "subject": "Download a statement",
+    "message": "How can I download last month's account statement?"
+  },
+  {
+    "ticket_id": "ticket-006",
+    "subject": "Payment and access complaint",
+    "message": "I am angry that a payment failed and now I cannot access the account."
+  }
+]

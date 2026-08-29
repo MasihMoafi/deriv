@@ -1,0 +1,38 @@
+[
+  {
+    "ticket_id": "ticket-001",
+    "category": "payment_issue",
+    "priority": "medium",
+    "sentiment": "frustrated"
+  },
+  {
+    "ticket_id": "ticket-002",
+    "category": "account_verification",
+    "priority": "medium",
+    "sentiment": "neutral"
+  },
+  {
+    "ticket_id": "ticket-003",
+    "category": "login_access",
+    "priority": "high",
+    "sentiment": "frustrated"
+  },
+  {
+    "ticket_id": "ticket-004",
+    "category": "trading_problem",
+    "priority": "medium",
+    "sentiment": "frustrated"
+  },
+  {
+    "ticket_id": "ticket-005",
+    "category": "other",
+    "priority": "low",
+    "sentiment": "neutral"
+  },
+  {
+    "ticket_id": "ticket-006",
+    "category": "login_access",
+    "priority": "high",
+    "sentiment": "frustrated"
+  }
+]
