@@ -37,6 +37,8 @@ def _records_by_ticket(records: Any, *, name: str) -> dict[str, Mapping[str, Any
             for ticket_id in sorted(records, key=str):
                 value = records[ticket_id]
                 if isinstance(value, Mapping):
+                    if "ticket_id" not in value:
+                        value = {"ticket_id": ticket_id, **value}
                     values.append(value)
                 else:
                     raise TypeError(f"{name} record for {ticket_id!r} is not a mapping")

@@ -12,6 +12,7 @@ from typing import Any
 from .contracts import CATEGORY_VALUES, PRIORITY_VALUES, SENTIMENT_VALUES
 
 PROMPT_VERSION = "ticket-classification-v1"
+DEFAULT_OPENROUTER_MODEL = "openai/gpt-5.6-luna"
 OPENROUTER_ENDPOINT = "https://openrouter.ai/api/v1/chat/completions"
 
 
@@ -44,7 +45,7 @@ class LLMAdapter:
     def from_environment(cls, requested: str | None = None) -> "LLMAdapter":
         selected = (requested or os.getenv("TICKET_LLM_PROVIDER", "auto")).lower()
         key = os.getenv("OPENROUTER_API_KEY")
-        model = os.getenv("OPENROUTER_MODEL")
+        model = os.getenv("OPENROUTER_MODEL", DEFAULT_OPENROUTER_MODEL)
         endpoint = os.getenv("OPENROUTER_ENDPOINT", OPENROUTER_ENDPOINT)
         if selected == "local":
             return cls(provider="local-fallback", model="local-deterministic")
@@ -77,7 +78,8 @@ class LLMAdapter:
             "Return JSON only, with exactly these fields: ticket_id (string), "
             "category (one of payment_issue, account_verification, login_access, "
             "trading_problem, other), priority (one of low, medium, high), "
-            "sentiment (one of neutral, frustrated, urgent), and reasoning (string)."
+            "sentiment (one of neutral, frustrated, urgent), and reasoning (a short, "
+            "human-readable string)."
         )
         # The user message contains the original ticket fields and no labels or
         # scoring guidance.

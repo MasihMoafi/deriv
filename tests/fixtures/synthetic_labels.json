@@ -1,0 +1,27 @@
+{
+  "SYN-001": {
+    "category": "payment_issue",
+    "priority": "high",
+    "sentiment": "frustrated"
+  },
+  "SYN-002": {
+    "category": "account_verification",
+    "priority": "high",
+    "sentiment": "frustrated"
+  },
+  "SYN-003": {
+    "category": "login_access",
+    "priority": "medium",
+    "sentiment": "neutral"
+  },
+  "SYN-004": {
+    "category": "trading_problem",
+    "priority": "high",
+    "sentiment": "urgent"
+  },
+  "SYN-005": {
+    "category": "login_access",
+    "priority": "high",
+    "sentiment": "frustrated"
+  }
+}

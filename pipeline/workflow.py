@@ -26,11 +26,28 @@ def _write_json(path: Path, value: Any) -> None:
         handle.write("\n")
 
 
-def load_inputs(tickets_path: Path, labels_path: Path) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+def load_inputs(
+    tickets_path: Path, labels_path: Path
+) -> tuple[list[dict[str, Any]], dict[str, dict[str, Any]]]:
     tickets = _read_json(tickets_path)
     labels = _read_json(labels_path)
-    if not isinstance(tickets, list) or not isinstance(labels, list):
-        raise ValueError("tickets.json and labels.json must contain arrays")
+    if not isinstance(tickets, list) or not isinstance(labels, dict):
+        raise ValueError("tickets.json must be an array and labels.json must be an object keyed by ticket_id")
+    required_ticket_fields = {"ticket_id", "subject", "message", "channel"}
+    for ticket in tickets:
+        if not isinstance(ticket, dict) or not required_ticket_fields.issubset(ticket):
+            raise ValueError("every ticket must contain ticket_id, subject, message, and channel")
+    ticket_ids = {ticket["ticket_id"] for ticket in tickets}
+    if ticket_ids != set(labels):
+        raise ValueError("labels.json keys must match tickets.json ticket IDs")
+    allowed_labels = {
+        "category": {"payment_issue", "account_verification", "login_access", "trading_problem", "other"},
+        "priority": {"low", "medium", "high"},
+        "sentiment": {"neutral", "frustrated", "urgent"},
+    }
+    for ticket_id, label in labels.items():
+        if not isinstance(label, dict) or any(label.get(field) not in values for field, values in allowed_labels.items()):
+            raise ValueError(f"label {ticket_id} has invalid or missing fields")
     return tickets, labels
 
 
@@ -52,7 +69,7 @@ def classify(
             calls.write(
                 json.dumps(
                     {
-                        "stage": "CLASSIFY",
+                        "stage": "classify",
                         "ticket_id": ticket["ticket_id"],
                         "timestamp": datetime.now(timezone.utc).isoformat(),
                         "provider": result.provider,
@@ -98,7 +115,7 @@ def validate_stage(
 
 
 def score_stage(
-    labels: list[dict[str, Any]],
+    labels: dict[str, dict[str, Any]],
     validation: dict[str, Any],
     output_dir: Path,
 ) -> dict[str, Any]:

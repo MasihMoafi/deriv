@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ticket Evaluation — Personal Verification</title>
+<style>
+:root{--bg:#0b1020;--panel:#131b31;--panel2:#18233e;--text:#e9eefc;--muted:#aab6d3;--good:#43d17a;--warn:#f3bd4f;--bad:#ff7070;--line:#2b395e;--accent:#7ca8ff}*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#0b1020,#111a32 55%,#0d1529);color:var(--text);font:15px/1.55 system-ui,-apple-system,Segoe UI,sans-serif}main{max-width:1180px;margin:0 auto;padding:34px 22px 64px}h1{font-size:34px;line-height:1.15;margin:0 0 8px}h2{font-size:21px;margin:30px 0 12px;border-bottom:1px solid var(--line);padding-bottom:8px}h3{font-size:16px;margin:20px 0 8px}.sub{color:var(--muted);margin:0 0 22px}.banner{border:1px solid #2c9c62;background:#123323;padding:16px 18px;border-radius:12px;margin-bottom:22px}.banner strong{color:var(--good)}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.card,.panel{background:rgba(19,27,49,.92);border:1px solid var(--line);border-radius:12px}.card{padding:16px}.card .num{font-size:30px;font-weight:750}.card .label{color:var(--muted);font-size:13px}.good{color:var(--good)}.warn{color:var(--warn)}.bad{color:var(--bad)}.panel{padding:16px;margin:12px 0;overflow:auto}table{width:100%;border-collapse:collapse;min-width:680px}th,td{text-align:left;vertical-align:top;padding:9px 10px;border-bottom:1px solid var(--line)}th{color:#c7d4f5;font-size:13px}td{color:#e4eaff}code{color:#bcd1ff;background:#0b1328;border:1px solid #263557;border-radius:4px;padding:1px 5px}pre{background:#080d1b;border:1px solid var(--line);border-radius:8px;padding:13px;overflow:auto;color:#d8e1fb;margin:8px 0;white-space:pre-wrap}.tag{display:inline-block;border-radius:99px;padding:2px 9px;font-size:12px;font-weight:700}.pass{background:#154b31;color:#83f0ad}.note{background:#4b3b16;color:#ffd875}.fail{background:#5a2027;color:#ff9ba0}.small{font-size:13px;color:var(--muted)}ul{margin-top:7px}.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:780px){.cards{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr}main{padding:24px 14px}h1{font-size:28px}}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <h1>Personal Verification Report</h1>
+  <p class="sub">Replayable AI ticket evaluation · authoritative contract audit · fresh evidence run</p>
+</header>
+<div class="banner"><strong>Current state: VERIFIED WITH EXPLICIT CAVEATS.</strong> The live artifact set was regenerated with <code>openai/gpt-5.6-luna</code>; no fallback records were present. This report deliberately separates current compliance from the initial implementation mistakes.</div>
+<section class="cards">
+  <div class="card"><div class="num good">5/5</div><div class="label">MUST COMPLETE items now satisfied</div></div>
+  <div class="card"><div class="num good">2/2</div><div class="label">SHOULD ATTEMPT items satisfied</div></div>
+  <div class="card"><div class="num warn">0/1</div><div class="label">STRETCH attempted (optional)</div></div>
+  <div class="card"><div class="num bad">3</div><div class="label">direct initial discrepancies found</div></div>
+</section>
+<h2>1. Initial discrepancy accounting</h2>
+<div class="panel">
+<table><thead><tr><th>Initial problem</th><th>Impact</th><th>Correction</th></tr></thead><tbody>
+<tr><td><strong>Missing <code>channel</code></strong> in the ticket contract and sample inputs.</td><td>Original fields were not preserved for evaluator-equivalent tickets. Directly affected MUST #1 and the source schema.</td><td>Added channel to contracts, fixtures, input loading, independent validation, and replacement smoke coverage.</td></tr>
+<tr><td><strong>Labels were an array</strong> instead of an object keyed by <code>ticket_id</code>.</td><td>This was the most serious clean-checkout failure: authoritative replacement <code>labels.json</code> would be rejected and scoring could not consume it. Affected MUST #2/#3.</td><td>Changed sample and documentation to keyed object; scoring now normalizes keyed values deterministically.</td></tr>
+<tr><td><strong>Call stage was <code>CLASSIFY</code></strong> instead of the stated lowercase <code>classify</code>.</td><td>Call-log contract mismatch; independent validation asserted the wrong value. Affected the validation/artifact requirement in MUST #5.</td><td>Logs and independent checks now use lowercase <code>classify</code>; pipeline stage display remains uppercase as required.</td></tr>
+</tbody></table>
+<p><strong>Count interpretation:</strong> there were <strong>3 direct contract discrepancies</strong>. They materially touched <strong>4 of 5 MUST sections</strong>: #1, #2, #3, and #5. The scoring/report logic itself was present, but the authoritative labels shape made the original end-to-end path noncompliant. Current status is 5/5.</p>
+</div>
+<h2>2. Rubric status against the source of truth</h2>
+<div class="panel">
+<table><thead><tr><th>Requirement</th><th>Status</th><th>Evidence</th></tr></thead><tbody>
+<tr><td>MUST #1 — one LLM classification call per ticket, exact prediction schema, prediction artifacts</td><td><span class="tag pass">PASS</span></td><td>6 live OpenRouter records, 6 prediction files, all model <code>openai/gpt-5.6-luna</code>, fallback count 0.</td></tr>
+<tr><td>MUST #2 — deterministic validation and validation.json</td><td><span class="tag pass">PASS</span></td><td>Validation module checks JSON, required fields, enums, source ID, and independent validation passes.</td></tr>
+<tr><td>MUST #3 — deterministic metrics and per-ticket results</td><td><span class="tag pass">PASS</span></td><td>Keyed labels accepted; category, priority, sentiment, exact-match, pass/fail metrics generated in code.</td></tr>
+<tr><td>MUST #4 — report with counts, metrics, error analysis, 2–4 improvements</td><td><span class="tag pass">PASS</span></td><td><code>report.md</code> contains Summary, Metrics, Validation status, Deterministic error analysis, and Improvement suggestions.</td></tr>
+<tr><td>MUST #5 — runnable ordered pipeline and independent validate.py</td><td><span class="tag pass">PASS</span></td><td>Fresh run prints the required stage order; <code>python validate.py</code> returns <code>VALIDATION OK</code>.</td></tr>
+<tr><td>SHOULD #6 — retry or repair invalid JSON</td><td><span class="tag pass">PASS</span></td><td>Markdown JSON fences are stripped locally; no second LLM call is made. Documented in README.</td></tr>
+<tr><td>SHOULD #7 — basic test coverage</td><td><span class="tag pass">PASS</span></td><td>Validation, scoring/reporting, and integration tests exist and passed below.</td></tr>
+<tr><td>STRETCH #8 — prompt-version comparison</td><td><span class="tag note">NOT ATTEMPTED</span></td><td>Optional; one prompt version is used and logged. It should not consume the remaining time.</td></tr>
+</tbody></table>
+</div>
+<h2>3. Fresh test evidence</h2>
+<div class="two">
+<div class="panel"><h3>Unittest discovery</h3><pre>python -m unittest discover -s tests -v
+
+Ran 16 tests in the final full suite
+OK
+
+4 additional regression/E2E tests now cover the exact authoritative sample, JSON-fence repair, invalid-prediction scoring, and the file-backed synthetic fixture. The original focused groups remain included.</pre><p class="small">The full suite includes the focused validation, scoring/reporting, integration, and additional regression/E2E tests.</p></div>
+<div class="panel"><h3>Validation-focused group</h3><pre>direct execution of tests/test_validation.py
+
+6 focused validation tests passed</pre><p class="small">Pytest is unavailable in this environment; these six pytest-style functions were executed directly rather than silently claiming pytest coverage.</p></div>
+</div>
+<div class="two">
+<div class="panel"><h3>Independent validator</h3><pre>python validate.py
+
+VALIDATION OK</pre></div>
+<div class="panel"><h3>Replacement-input smoke test</h3><pre>Different IDs: R-9001, R-9002, R-9003
+Ticket shape: includes channel
+Labels: object keyed by ticket ID
+Provider: explicit local fallback
+
+run_returncode= 0
+validate_returncode= 0
+VALIDATION OK
+prediction_files= 3</pre></div>
+</div>
+<h2>4. Live artifact evidence</h2>
+<div class="panel"><pre>required_artifacts_present= True
+prediction_files= 6
+call_records= 6
+stages= ['classify']
+providers= ['openrouter']
+models= ['openai/gpt-5.6-luna']
+fallback_count= 0
+ticket_count= 6
+labels_type= dict</pre></div>
+<div class="panel"><h3>Current metrics</h3><table><tr><th>Metric</th><th>Value</th></tr><tr><td>Category accuracy</td><td>1.0</td></tr><tr><td>Priority accuracy</td><td>0.6666666666666666</td></tr><tr><td>Sentiment accuracy</td><td>0.6666666666666666</td></tr><tr><td>Exact-match rate</td><td>0.5</td></tr><tr><td>Valid predictions</td><td>6 / 6</td></tr><tr><td>Passed tickets</td><td>3 / 6</td></tr></table><p class="small">These are six-ticket sample metrics, not a general provider benchmark; live model output can vary across runs.</p></div>
+<h2>5. Artifact fingerprints</h2>
+<div class="panel"><p class="small">SHA-256 values were captured after the live Luna run. They let you detect later artifact substitution or mutation.</p><pre>tickets.json       237e36b2de4bcaf58d45a764bf2b367b0a7a15c46c2b43c3aa3a293e99a4ca50
+labels.json        9df26e8d80845e9fd32478c73803b71102a0b8a5447a7e83a808f568d6eaf98d
+validation.json    caf746c8bb26037571327180ced0fec3e3c06c9dacdba50168b097b76dcb4892
+metrics.json       396c7e92b8618e60bf6251e7b2e8375e63a2621077b1b8497f4f8e91dd17f0e1
+report.md          104547d5c8a85e64f265fc458aec9e404eb526eb67b1d5c0a5e62e156f120d6b
+llm_calls.jsonl    6db372d4d8013ae03c82204d667042622e8b368fe53c1b3fe22e7b85898aac65</pre></div>
+<h2>6. Adversarial failure audit</h2>
+<div class="panel"><p>Mutations were applied only to disposable copies of a verified baseline. The first harness attempt was discarded because the harness itself had a missing helper and a corrupted baseline; the matrix was rerun correctly.</p><table><thead><tr><th>Mutation</th><th>Before narrow fixes</th><th>After fixes</th></tr></thead><tbody><tr><td>Invalid ISO timestamp</td><td><span class="tag fail">ESCAPED</span></td><td><span class="tag pass">REJECTED</span></td></tr><tr><td>Falsified validation wrapper</td><td><span class="tag fail">ESCAPED</span></td><td><span class="tag pass">REJECTED</span></td></tr><tr><td>Fake nonempty report</td><td><span class="tag fail">ESCAPED</span></td><td><span class="tag pass">REJECTED</span></td></tr><tr><td>Extra prediction file</td><td><span class="tag fail">ESCAPED</span></td><td><span class="tag pass">REJECTED</span></td></tr><tr><td>Malformed input, labels, JSON, IDs, enums, missing files, duplicate/wrong logs, metrics tampering</td><td><span class="tag pass">REJECTED</span></td><td><span class="tag pass">REJECTED</span></td></tr></tbody></table><p class="small">The detailed matrix and residual risks are in <code>FAILURE_AUDIT.md</code>.</p></div>
+<h2>7. Standalone synthetic fixture experiment</h2>
+<div class="panel"><p><strong>Objective:</strong> prove a file-backed end-to-end run with different IDs, channels, keyed labels, deliberate scoring failures, and metrics that are not the six-ticket sample.</p><pre>Sources:
+/home/masih/Desktop/p/deriv/tests/fixtures/synthetic_tickets.json (884 bytes, 5 tickets)
+/home/masih/Desktop/p/deriv/tests/fixtures/synthetic_labels.json  (540 bytes, 5 keyed labels)
+
+Output: /tmp/deriv-synthetic-e2e/output
+Wall-clock: 104 ms
+prediction_files= 5
+call_records= 5
+validation_valid= True
+
+category_accuracy= 0.8
+priority_accuracy= 0.4
+sentiment_accuracy= 0.4
+exact_match_rate= 0.0
+valid_predictions= 5
+invalid_predictions= 0
+passed_tickets= 0
+failed_tickets= 5
+
+SYN-001: priority_mismatch, sentiment_mismatch
+SYN-002: sentiment_mismatch
+SYN-003: priority_mismatch
+SYN-004: priority_mismatch, sentiment_mismatch
+SYN-005: category_mismatch
+
+python validate.py --output-dir /tmp/deriv-synthetic-e2e/output
+VALIDATION OK</pre><p class="small">This is a local deterministic fallback run: evidence of pipeline mechanics and failure detection, not LLM quality.</p></div>
+<h2>8. Anti-masquerade mutation audit</h2>
+<div class="panel"><p>A copied artifact directory was deliberately corrupted three ways. The live artifacts were not modified.</p><pre>tampered_metrics_detected= True
+missing_prediction_detected= True
+wrong_log_stage_detected= True</pre><p class="small">This demonstrates that <code>validate.py</code> is not merely reporting success based on file presence.</p></div>
+<h2>9. Where to focus the remaining ten minutes</h2>
+<div class="panel"><ol><li><strong>Highest value:</strong> have one independent agent run a clean-checkout audit using only replacement files with different IDs, channels, and keyed labels, then tamper <code>metrics.json</code>, remove one prediction, and alter one log stage to confirm <code>validate.py</code> fails.</li><li><strong>Second:</strong> have another agent review the source statement line-by-line against contracts and CLI behavior, reporting findings only—no speculative refactors.</li><li><strong>Do not spend time on:</strong> stretch prompt comparison, UI polish, or broad test-framework work. The remaining risk is evidence integrity and clean-checkout behavior.</li></ol></div>
+<h2>Bottom line</h2>
+<div class="banner"><strong>Current compliance: 7/7 required + should-attempt items; 5/5 MUST and 2/2 SHOULD.</strong><br>The initial implementation was not fully compliant: 3 direct discrepancies, including the authoritative labels-shape failure. Those discrepancies are now corrected and covered by fresh live, independent, and replacement-input evidence.</div>
+</main>
+</body>
+</html>

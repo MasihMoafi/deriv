@@ -1,0 +1,11 @@
+{
+  "category_accuracy": 0.8333333333333334,
+  "exact_match_rate": 0.5,
+  "failed_tickets": 3,
+  "invalid_predictions": 0,
+  "passed_tickets": 3,
+  "priority_accuracy": 0.8333333333333334,
+  "sentiment_accuracy": 0.8333333333333334,
+  "total_tickets": 6,
+  "valid_predictions": 6
+}

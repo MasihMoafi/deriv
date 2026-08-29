@@ -1,0 +1,7 @@
+{
+  "category": "payment_issue",
+  "priority": "high",
+  "reasoning": "The user is angry about a failed payment and also cannot access the account, indicating a payment problem with high urgency. The sentiment expressed is frustration.",
+  "sentiment": "frustrated",
+  "ticket_id": "ticket-006"
+}

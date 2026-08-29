@@ -9,39 +9,13 @@ from validate import verify
 
 class IntegrationTests(unittest.TestCase):
     def test_local_pipeline_writes_replayable_artifacts_and_validates(self) -> None:
-        tickets = [
-            {
-                "ticket_id": "synthetic-a",
-                "subject": "Login problem",
-                "message": "I cannot sign in and need access urgently.",
-            },
-            {
-                "ticket_id": "synthetic-b",
-                "subject": "General question",
-                "message": "Please explain this feature.",
-            },
-        ]
-        labels = [
-            {
-                "ticket_id": "synthetic-a",
-                "category": "login_access",
-                "priority": "high",
-                "sentiment": "urgent",
-            },
-            {
-                "ticket_id": "synthetic-b",
-                "category": "other",
-                "priority": "low",
-                "sentiment": "neutral",
-            },
-        ]
+        fixture_dir = Path(__file__).parent / "fixtures"
+        tickets_path = fixture_dir / "synthetic_tickets.json"
+        labels_path = fixture_dir / "synthetic_labels.json"
+        tickets = json.loads(tickets_path.read_text(encoding="utf-8"))
+
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            tickets_path = root / "source-tickets.json"
-            labels_path = root / "source-labels.json"
-            tickets_path.write_text(json.dumps(tickets), encoding="utf-8")
-            labels_path.write_text(json.dumps(labels), encoding="utf-8")
-
             result = run_pipeline(tickets_path, labels_path, root, provider="local")
 
             self.assertEqual(
@@ -57,7 +31,14 @@ class IntegrationTests(unittest.TestCase):
             self.assertEqual(verify(root), [])
             calls = (root / "llm_calls.jsonl").read_text(encoding="utf-8").splitlines()
             self.assertEqual(len(calls), len(tickets))
+            call_records = [json.loads(line) for line in calls]
+            self.assertEqual({record["stage"] for record in call_records}, {"classify"})
             self.assertEqual(result["evaluation"]["metrics"]["total_tickets"], len(tickets))
+            self.assertEqual(result["evaluation"]["metrics"]["category_accuracy"], 0.8)
+            self.assertEqual(result["evaluation"]["metrics"]["priority_accuracy"], 0.4)
+            self.assertEqual(result["evaluation"]["metrics"]["sentiment_accuracy"], 0.4)
+            self.assertEqual(result["evaluation"]["metrics"]["exact_match_rate"], 0.0)
+            self.assertEqual(result["evaluation"]["metrics"]["failed_tickets"], 5)
 
 
 if __name__ == "__main__":

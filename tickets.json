@@ -1,32 +1,38 @@
 [
   {
-    "ticket_id": "ticket-001",
+    "channel": "email",
+    "message": "My card payment was declined twice and I need help understanding the charge.",
     "subject": "Card payment declined",
-    "message": "My card payment was declined twice and I need help understanding the charge."
+    "ticket_id": "ticket-001"
   },
   {
-    "ticket_id": "ticket-002",
+    "channel": "chat",
+    "message": "Which document should I upload to complete account verification?",
     "subject": "Identity verification question",
-    "message": "Which document should I upload to complete account verification?"
+    "ticket_id": "ticket-002"
   },
   {
-    "ticket_id": "ticket-003",
+    "channel": "web",
+    "message": "I cannot log in after resetting my password and the account is blocked.",
     "subject": "Cannot sign in",
-    "message": "I cannot log in after resetting my password and the account is blocked."
+    "ticket_id": "ticket-003"
   },
   {
-    "ticket_id": "ticket-004",
+    "channel": "chat",
+    "message": "My trading order failed immediately and I need to know why.",
     "subject": "Trading order rejected",
-    "message": "My trading order failed immediately and I need to know why."
+    "ticket_id": "ticket-004"
   },
   {
-    "ticket_id": "ticket-005",
+    "channel": "email",
+    "message": "How can I download last month's account statement?",
     "subject": "Download a statement",
-    "message": "How can I download last month's account statement?"
+    "ticket_id": "ticket-005"
   },
   {
-    "ticket_id": "ticket-006",
+    "channel": "chat",
+    "message": "I am angry that a payment failed and now I cannot access the account.",
     "subject": "Payment and access complaint",
-    "message": "I am angry that a payment failed and now I cannot access the account."
+    "ticket_id": "ticket-006"
   }
 ]

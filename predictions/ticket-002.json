@@ -1,0 +1,7 @@
+{
+  "category": "account_verification",
+  "priority": "low",
+  "reasoning": "The user is asking a routine question about which document is required for identity verification.",
+  "sentiment": "neutral",
+  "ticket_id": "ticket-002"
+}

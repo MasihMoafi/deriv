@@ -22,7 +22,12 @@ Category = Literal[
 Priority = Literal["low", "medium", "high"]
 Sentiment = Literal["neutral", "frustrated", "urgent"]
 
-TICKET_FIELDS: Final[tuple[str, ...]] = ("ticket_id", "subject", "message")
+TICKET_FIELDS: Final[tuple[str, ...]] = (
+    "ticket_id",
+    "subject",
+    "message",
+    "channel",
+)
 PREDICTION_FIELDS: Final[tuple[str, ...]] = (
     "ticket_id",
     "category",
@@ -31,7 +36,6 @@ PREDICTION_FIELDS: Final[tuple[str, ...]] = (
     "reasoning",
 )
 LABEL_FIELDS: Final[tuple[str, ...]] = (
-    "ticket_id",
     "category",
     "priority",
     "sentiment",
@@ -50,13 +54,17 @@ class Ticket(TypedDict):
     ticket_id: str
     subject: str
     message: str
+    channel: str
 
 
 class Label(TypedDict):
-    ticket_id: str
     category: Category
     priority: Priority
     sentiment: Sentiment
+
+
+class LabelRecord(Label):
+    ticket_id: str
 
 
 class Prediction(TypedDict):

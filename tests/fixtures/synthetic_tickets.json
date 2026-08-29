@@ -1,0 +1,32 @@
+[
+  {
+    "ticket_id": "SYN-001",
+    "subject": "Charged twice for a deposit",
+    "message": "My card was charged twice for one deposit. Please fix it.",
+    "channel": "email"
+  },
+  {
+    "ticket_id": "SYN-002",
+    "subject": "Verification is blocking withdrawal",
+    "message": "My identity document verification is blocking my withdrawal urgently.",
+    "channel": "chat"
+  },
+  {
+    "ticket_id": "SYN-003",
+    "subject": "Reset link expired",
+    "message": "The password reset link expired after I clicked it.",
+    "channel": "web"
+  },
+  {
+    "ticket_id": "SYN-004",
+    "subject": "Trading order failed",
+    "message": "My trading order failed and I am frustrated.",
+    "channel": "chat"
+  },
+  {
+    "ticket_id": "SYN-005",
+    "subject": "Payment and account access",
+    "message": "A payment failed and I cannot access my account.",
+    "channel": "email"
+  }
+]

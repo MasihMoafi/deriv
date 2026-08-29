@@ -1,0 +1,7 @@
+{
+  "category": "login_access",
+  "priority": "high",
+  "reasoning": "The user cannot sign in after a password reset and reports that the account is blocked, requiring urgent access assistance.",
+  "sentiment": "urgent",
+  "ticket_id": "ticket-003"
+}

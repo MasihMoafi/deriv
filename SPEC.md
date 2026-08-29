@@ -6,21 +6,21 @@ Build a genuine, replayable AI evaluation pipeline for support-ticket classifica
 
 ## Exact input schemas
 
-`tickets.json` is a JSON array. Each ticket object has exactly these required fields:
+`tickets.json` is a JSON array. Each ticket object has these required fields:
 
 ```json
 {
   "ticket_id": "string",
   "subject": "string",
-  "message": "string"
+  "message": "string",
+  "channel": "string"
 }
 ```
 
-`labels.json` is a JSON array. Each label object has these required fields:
+`labels.json` is a JSON object keyed by `ticket_id`. Each value has these required fields:
 
 ```json
 {
-  "ticket_id": "string",
   "category": "payment_issue | account_verification | login_access | trading_problem | other",
   "priority": "low | medium | high",
   "sentiment": "neutral | frustrated | urgent"
