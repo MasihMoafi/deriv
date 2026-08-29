@@ -1,7 +1,7 @@
 {
   "category": "login_access",
   "priority": "high",
-  "reasoning": "The user cannot sign in after a password reset and reports that the account is blocked, requiring urgent access assistance.",
-  "sentiment": "urgent",
+  "reasoning": "The user cannot log in after a password reset and reports the account is blocked, which is a direct login/access issue. The blocked account prevents any further action, warranting high priority. The tone suggests frustration with the inability to access the account.",
+  "sentiment": "frustrated",
   "ticket_id": "ticket-003"
 }

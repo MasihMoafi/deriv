@@ -5,7 +5,7 @@
       "prediction": {
         "category": "payment_issue",
         "priority": "medium",
-        "reasoning": "The customer reports two declined card payment attempts and needs clarification about the charge.",
+        "reasoning": "The user reports a card payment being declined twice, which falls under payment_issue. It's a substantive problem but not an immediate block of the account, so medium priority. The tone indicates frustration with repeated declines.",
         "sentiment": "frustrated",
         "ticket_id": "ticket-001"
       },
@@ -17,7 +17,7 @@
       "prediction": {
         "category": "account_verification",
         "priority": "low",
-        "reasoning": "The user is asking a routine question about which document is required for identity verification.",
+        "reasoning": "User asks which document to upload for verification, an informational request with no urgency.",
         "sentiment": "neutral",
         "ticket_id": "ticket-002"
       },
@@ -29,8 +29,8 @@
       "prediction": {
         "category": "login_access",
         "priority": "high",
-        "reasoning": "The user cannot sign in after a password reset and reports that the account is blocked, requiring urgent access assistance.",
-        "sentiment": "urgent",
+        "reasoning": "The user cannot log in after a password reset and reports the account is blocked, which is a direct login/access issue. The blocked account prevents any further action, warranting high priority. The tone suggests frustration with the inability to access the account.",
+        "sentiment": "frustrated",
         "ticket_id": "ticket-003"
       },
       "ticket_id": "ticket-003",
@@ -41,8 +41,8 @@
       "prediction": {
         "category": "trading_problem",
         "priority": "medium",
-        "reasoning": "The user reports an immediately rejected trading order and is seeking an explanation.",
-        "sentiment": "frustrated",
+        "reasoning": "The user reports a trading order failure and seeks an explanation, which is a core trading issue without explicit urgency or strong frustration.",
+        "sentiment": "neutral",
         "ticket_id": "ticket-004"
       },
       "ticket_id": "ticket-004",
@@ -53,7 +53,7 @@
       "prediction": {
         "category": "other",
         "priority": "low",
-        "reasoning": "The customer is asking how to download a past account statement, with no indication of urgency or frustration.",
+        "reasoning": "The user is asking for a how‑to request to download a statement, which is informational and not a blocking issue.",
         "sentiment": "neutral",
         "ticket_id": "ticket-005"
       },
@@ -63,9 +63,9 @@
     {
       "errors": [],
       "prediction": {
-        "category": "payment_issue",
+        "category": "login_access",
         "priority": "high",
-        "reasoning": "The user is angry about a failed payment and also cannot access the account, indicating a payment problem with high urgency. The sentiment expressed is frustration.",
+        "reasoning": "The user reports being unable to access their account, which overrides the payment issue for categorization. The account lock is a blocking problem, so priority is high. The user expresses anger, indicating a frustrated sentiment.",
         "sentiment": "frustrated",
         "ticket_id": "ticket-006"
       },

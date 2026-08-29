@@ -11,7 +11,7 @@ from typing import Any
 
 from .contracts import CATEGORY_VALUES, PRIORITY_VALUES, SENTIMENT_VALUES
 
-PROMPT_VERSION = "ticket-classification-v1"
+PROMPT_VERSION = "ticket-classification-v2"
 DEFAULT_OPENROUTER_MODEL = "openai/gpt-5.6-luna"
 OPENROUTER_ENDPOINT = "https://openrouter.ai/api/v1/chat/completions"
 
@@ -79,7 +79,21 @@ class LLMAdapter:
             "category (one of payment_issue, account_verification, login_access, "
             "trading_problem, other), priority (one of low, medium, high), "
             "sentiment (one of neutral, frustrated, urgent), and reasoning (a short, "
-            "human-readable string)."
+            "human-readable string). Use all original ticket fields. Choose one "
+            "primary category: payment_issue covers charges, deposits, cards, refunds, "
+            "or payment failures; account_verification covers identity, documents, or "
+            "verification requirements; login_access covers sign-in, passwords, reset "
+            "links, or inability to access an account; trading_problem covers trades, "
+            "orders, or positions; use other when none is central. If multiple issues "
+            "appear, choose the issue most central to the requested resolution; explicit "
+            "inability to access the account takes precedence for the category. Set high "
+            "priority for an actively blocked account or failed/high-impact transaction, "
+            "medium for a substantive problem that is not currently blocking progress, "
+            "and low for informational or how-to requests. Use urgent sentiment only "
+            "when the person expresses immediate urgency or an emergency; use frustrated "
+            "for complaints, anger, or repeated failures; otherwise use neutral. Keep "
+            "technical descriptions of an immediate system behavior neutral unless the "
+            "person expresses emotional urgency."
         )
         # The user message contains the original ticket fields and no labels or
         # scoring guidance.

@@ -1,7 +1,7 @@
 {
   "category": "trading_problem",
   "priority": "medium",
-  "reasoning": "The user reports an immediately rejected trading order and is seeking an explanation.",
-  "sentiment": "frustrated",
+  "reasoning": "The user reports a trading order failure and seeks an explanation, which is a core trading issue without explicit urgency or strong frustration.",
+  "sentiment": "neutral",
   "ticket_id": "ticket-004"
 }

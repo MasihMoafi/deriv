@@ -1,7 +1,7 @@
 {
   "category": "payment_issue",
   "priority": "medium",
-  "reasoning": "The customer reports two declined card payment attempts and needs clarification about the charge.",
+  "reasoning": "The user reports a card payment being declined twice, which falls under payment_issue. It's a substantive problem but not an immediate block of the account, so medium priority. The tone indicates frustration with repeated declines.",
   "sentiment": "frustrated",
   "ticket_id": "ticket-001"
 }
